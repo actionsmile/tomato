@@ -14,10 +14,11 @@
 
     <hr>
 
-    <router-view></router-view>
+    <slot></slot>
 
     <div class="time-entries">
       <p v-if="!timeEntries.length"><strong>No time entries yet</strong></p>
+      <p v-else><strong>Your time entries</strong></p>
 
       <div class="list-group">
 
@@ -36,7 +37,7 @@
 
             <div class="col-sm-2 text-center time-block">
               <h3 class="list-group-item-text total-time">
-                <i class="glyphicon glyphicon-time"></i>
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
                 {{ timeEntry.totalTime }}
               </h3>
               <p class="label label-primary text-center">
@@ -66,41 +67,62 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      // We want to start with an existing time entry
-      let existingEntry = {
-        user: {
-          firstName: 'Aziz',
-          lastName: 'Zainutdin',
-          email: 'aloha@scriptor.me',
-          image: 'http://en.gravatar.com/userimage/46607040/98e4f40ecd51e03324d0c791f65e2d57.jpg?s=250'
-        },
-        comment: 'First time entry',
-        totalTime: 1.5,
-        date: '17 Feb 2017'
-      }
-      return {
-        // Start out with the existing entry
-        // by placing it in the array
-        timeEntries: [existingEntry]
+export default {
+  created: function () {
+    this.$on('update-time', this.updateTime)
+  },
+
+  beforeDestroy: function () {
+    this.$off('update-time', this.updateTime)
+  },
+
+  data () {
+    let existingEntry = {
+      user: {
+        firstName: 'Aziz',
+        lastName: 'Zainutdin',
+        email: 'aloha@scriptor.me',
+        image: 'http://en.gravatar.com/userimage/46607040/98e4f40ecd51e03324d0c791f65e2d57.jpg?size=75'
+      },
+      comment: 'First time entry',
+      totalTime: 1.5,
+      date: 'Feb 17, 2017'
+    }
+    return {
+      timeEntries: [existingEntry]
+    }
+  },
+  methods: {
+    deleteTimeEntry: function (timeEntry) {
+      let index = this.timeEntries.indexOf(timeEntry)
+      if (window.confirm('Are you sure you want to delete this time entry?')) {
+        this.timeEntries.splice(index, 1)
+        this.$emit('delete-time', timeEntry)
       }
     },
-    methods: {
-      deleteTimeEntry (timeEntry) {
-        // Get the index of the clicked time entry and splice it out
-        let index = this.timeEntries.indexOf(timeEntry)
-        if (window.confirm('Are you sure you want to delete this time entry?')) {
-          this.timeEntries.splice(index, 1)
-          this.$dispatch('deleteTime', timeEntry)
-        }
-      }
-    },
-    events: {
-      timeUpdate (timeEntry) {
-        this.timeEntries.push(timeEntry)
-        return true
-      }
+    updateTime: function (timeEntry) {
+      this.timeEntries.push(timeEntry)
+      return true
     }
   }
+}
 </script>
+
+<style>
+.avatar {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.user-details {
+  background-color: #f5f5f5;
+  border-right: 1px solid #ddd;
+  margin: -10px 0;
+}
+.time-block {
+  padding: 10px;
+}
+.comment-section {
+  padding: 20px;
+}
+</style>

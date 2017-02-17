@@ -1,34 +1,41 @@
 <template>
   <div class="wrapper">
-    <nav class="navbar navbar-inverse bg-inverse">
-      <div class="container">
-          <a class="navbar-brand mb-0 alizarin"><i class="fa fa-clock-o" aria-hidden="true"></i> Tomato</a>
-        <ul class="nav navbar-nav">
-          <li><router-link to="/home">Home</router-link></li>
-          <li><router-link to="/time-entries">Time Entries</a></li>
-        </ul>
-      </div>
-    </nav>
+    <navigation-menu><slot>{{ app.name }}</slot></navigation-menu>
     <div class="container">
       <div class="col-sm-3">
 
       </div>
       <div class="col-sm-9">
-        <router-view></router-view>
+        <home v-if="$route.path === '/home'"><slot>{{ app.name }}</slot></home>
+        <time-entries v-else>
+          <slot>
+            <log-time v-if="$route.path.indexOf('log-time') > 0" />
+            </slot>
+        </time-entries>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import NavigationMenu from './components/NavigationMenu'
+import Home from './components/Home'
+import TimeEntries from './components/TimeEntries'
+import LogTime from './components/LogTime'
+
 export default {
-  name: 'app'
+  data () {
+    return {
+      app: {
+        name: 'Tomato'
+      }
+    }
+  },
+  components: {
+    NavigationMenu,
+    Home,
+    TimeEntries,
+    LogTime
+  }
 }
 </script>
-
-<style scoped>
-
-.alizarin {
-  color: #e74c3c;
-}
-</style>
