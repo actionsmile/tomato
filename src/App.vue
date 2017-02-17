@@ -6,12 +6,16 @@
 
       </div>
       <div class="col-sm-9">
-        <home v-if="$route.path === '/home'"><slot>{{ app.name }}</slot></home>
-        <time-entries v-else>
-          <slot>
-            <log-time v-if="$route.path.indexOf('log-time') > 0" />
-          </slot>
-        </time-entries>
+        <transition name="log-time-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+          <home v-if="$route.path === '/home'"><slot>{{ app.name }}</slot></home>
+          <time-entries v-else>
+            <transition name="log-time-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
+              <slot>
+                <log-time v-if="$route.path.indexOf('log-time') > 0" />
+              </slot>
+            </transition>
+          </time-entries>
+        </transition>
       </div>
     </div>
   </div>
