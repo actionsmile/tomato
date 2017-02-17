@@ -1,6 +1,11 @@
 <template>
   <div class="jumbotron">
-  
+    <h1>Tomato Time Tracker</h1>
+    <p>
+      <strong>
+        Get started by <a href="#">creating a time entry</a>.
+      </strong>
+    </p>
   </div>
 </template>
 
@@ -12,21 +17,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
