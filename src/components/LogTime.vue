@@ -1,41 +1,44 @@
 <template>
-  <div class="form-horizontal">
-    <div class="form-group">
-      <div class="col-sm-6">
-        <label>Date</label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="timeEntry.date"
-          :placeholder="today"
-        />
+  <div class="wrapper" v-on:keyup.esc="gotoEntries()">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-6">
+          <label>Дата</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="timeEntry.date"
+            :placeholder="today"
+            autofocus
+          />
+        </div>
+        <div class="col-sm-6">
+          <label>Время (в часах)</label>
+          <input
+            type="number"
+            class="form-control"
+            v-model="timeEntry.totalTime"
+            placeholder="Hours"
+          />
+        </div>
       </div>
-      <div class="col-sm-6">
-        <label>Hours</label>
-        <input
-          type="number"
-          class="form-control"
-          v-model="timeEntry.totalTime"
-          placeholder="Hours"
-        />
+      <div class="form-group">
+        <div class="col-sm-12">
+          <label>Комментарии</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="timeEntry.comment"
+            placeholder="Комментарий, например git-commit"
+          />
+        </div>
       </div>
+      <button class="btn btn-primary" @click="save()">Добавить</button>
+      <router-link to="/time-entries">
+        <button class="btn btn-danger">Отменить</button>
+      </router-link>
+      <hr>
     </div>
-    <div class="form-group">
-      <div class="col-sm-12">
-        <label>Comment</label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="timeEntry.comment"
-          placeholder="Comment"
-        />
-      </div>
-    </div>
-    <button class="btn btn-primary" @click="save()">Save</button>
-    <router-link to="/time-entries">
-      <button class="btn btn-danger">Cancel</button>
-    </router-link>
-    <hr>
   </div>
 </template>
 
@@ -61,14 +64,18 @@
           month: 'short',
           day: 'numeric'
         }
-        return date.toLocaleString('en-US', options)
+        return date.toLocaleString('ru', options)
       }
     },
     methods: {
-      save () {
+      save: function () {
         let newTimeEntry = this.timeEntry
         this.$emit('update-time', newTimeEntry)
         this.timeEntry = {}
+      },
+      gotoEntries: function () {
+        this.$router.go(-1)
+        // time-entries
       }
     }
   }

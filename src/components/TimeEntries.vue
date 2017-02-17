@@ -1,24 +1,15 @@
 <template>
   <div>
     <router-link to="/time-entries/log-time">
-      <a
-        v-if="$route.path !== '/time-entries/log-time'"
-        class="btn btn-primary">
-        Log Time
-      </a>
+      <a v-if="$route.path !== '/time-entries/log-time'" class="btn btn-primary">Добавить запись</a>
     </router-link>
-
-    <div v-if="$route.path === '/time-entries/log-time'">
-      <h3>Log Time</h3>
-    </div>
-
     <hr>
 
     <slot></slot>
 
     <div class="time-entries">
-      <p v-if="!timeEntries.length"><strong>No time entries yet</strong></p>
-      <p v-else><strong>Your time entries</strong></p>
+      <p v-if="!timeEntries.length"><strong>Упс! А здесь пусто. Может пора отросить лень в сторону? ;)</strong></p>
+      <p v-else><strong>Ваша лента времени по проекту</strong></p>
 
       <div class="list-group">
 
@@ -68,14 +59,6 @@
 
 <script>
 export default {
-  created: function () {
-    this.$on('update-time', this.updateTime)
-  },
-
-  beforeDestroy: function () {
-    this.$off('update-time', this.updateTime)
-  },
-
   data () {
     let existingEntry = {
       user: {
@@ -84,7 +67,7 @@ export default {
         email: 'aloha@scriptor.me',
         image: 'http://en.gravatar.com/userimage/46607040/98e4f40ecd51e03324d0c791f65e2d57.jpg?size=75'
       },
-      comment: 'First time entry',
+      comment: 'Added a lot of code. See commit 0ff67rre9',
       totalTime: 1.5,
       date: 'Feb 17, 2017'
     }
