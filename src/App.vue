@@ -10,7 +10,7 @@
         <time-entries v-else>
           <slot>
             <log-time v-if="$route.path.indexOf('log-time') > 0" />
-            </slot>
+          </slot>
         </time-entries>
       </div>
     </div>
