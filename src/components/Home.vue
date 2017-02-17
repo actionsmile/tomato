@@ -1,10 +1,21 @@
 <template>
-  <div class="jumbotron">
-    <h1><slot></slot> Time Tracker</h1>
+  <div>
+    <h1 class="ga"><slot></slot></h1>
     <p>
       <strong>
-        Get started by <router-link to="/time-entries">creating a time entry</router-link>.
+        Чтобы начать учет рабочего времни, просто <router-link to="/time-entries" class="ga">добавьте запись</router-link>
       </strong>
     </p>
   </div>
 </template>
+
+<style scoped>
+a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
+h1 {
+  font-size: 5em;
+}
+</style>
