@@ -3,7 +3,7 @@
     <h1>Tomato Time Tracker</h1>
     <p>
       <strong>
-        Get started by <a href="#">creating a time entry</a>.
+        Get started by <router-link to="/time-entries">creating a time entry</router-link>.
       </strong>
     </p>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'hello'
+  name: 'home'
 }
 </script>
 
