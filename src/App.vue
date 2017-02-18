@@ -10,11 +10,9 @@
       <div class="col-sm-9">
         <transition name="home-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
           <home v-if="$route.path === '/home'"><slot>{{ app.name }}</slot></home>
-          <time-entries v-on:delete-time="deleteTime()" v-else>
+          <time-entries v-on:delete-time="deleteTime($event)" v-else>
             <transition name="log-time-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
-              <slot>
-                <log-time v-on:update-time="updateTime()" v-if="$route.path.indexOf('log-time') > 0" />
-              </slot>
+              <log-time v-on:update-time="updateTime($event)" v-if="$route.path.indexOf('log-time') > 0" />>
             </transition>
           </time-entries>
         </transition>

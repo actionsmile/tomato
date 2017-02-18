@@ -8,7 +8,7 @@
     <slot></slot>
 
     <div class="time-entries">
-      <p v-if="!timeEntries.length"><strong>Упс! А здесь пусто. Может пора отросить лень в сторону? ;)</strong></p>
+      <p v-if="!timeEntries.length"><strong>Упс! А здесь пусто. Может пора отбросить лень в сторону? ;)</strong></p>
       <p v-else><strong>Ваша лента времени по проекту</strong></p>
 
       <div class="list-group">
