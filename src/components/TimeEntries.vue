@@ -5,7 +5,9 @@
     </router-link>
     <hr>
 
-    <slot></slot>
+    <transition name="log-time-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
+      <log-time v-on:update-time="updateTime($event)" v-if="$route.path.indexOf('log-time') > 0" />
+    </transition>
 
     <div class="time-entries">
       <p v-if="!timeEntries.length"><strong>Упс! А здесь пусто. Может пора отбросить лень в сторону? ;)</strong></p>
@@ -58,7 +60,12 @@
 </template>
 
 <script>
+import LogTime from './LogTime'
+
 export default {
+  components: {
+    LogTime
+  },
   data () {
     let existingEntry = {
       user: {
@@ -85,6 +92,7 @@ export default {
     },
     updateTime: function (timeEntry) {
       this.timeEntries.push(timeEntry)
+      this.$emit('update-time', timeEntry)
       return true
     }
   }
