@@ -48,10 +48,10 @@ export default {
   },
   methods: {
     deleteTime: function (timeEntry) {
-      window.alert('Delete')
+      this.totalTime -= parseFloat(timeEntry.totalTime)
     },
     updateTime: function (timeEntry) {
-      window.alert('Update')
+      this.totalTime += parseFloat(timeEntry.totalTime)
     }
   }
 }
