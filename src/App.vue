@@ -10,13 +10,7 @@
       <div class="col-sm-9">
         <transition name="home-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
           <home v-if="$route.path === '/home'"><slot>{{ app.name }}</slot></home>
-          <time-entries v-on:delete-time="deleteTime()" v-else>
-            <transition name="log-time-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
-              <slot>
-                <log-time v-on:update-time="updateTime()" v-if="$route.path.indexOf('log-time') > 0" />
-              </slot>
-            </transition>
-          </time-entries>
+          <time-entries @delete-time="deleteTime($event)" @update-time="updateTime($event)" v-else />
         </transition>
       </div>
     </div>
@@ -27,7 +21,6 @@
 import NavigationMenu from './components/NavigationMenu'
 import Home from './components/Home'
 import TimeEntries from './components/TimeEntries'
-import LogTime from './components/LogTime'
 import Sidebar from './components/Sidebar'
 
 export default {
@@ -43,7 +36,6 @@ export default {
     NavigationMenu,
     Home,
     TimeEntries,
-    LogTime,
     Sidebar
   },
   methods: {
