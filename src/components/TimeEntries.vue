@@ -6,7 +6,7 @@
     <hr>
 
     <transition name="log-time-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" mode="out-in">
-      <log-time v-on:update-time="updateTime($event)" v-if="$route.path.indexOf('log-time') > 0" />
+      <log-time v-on:update-time="updateTime($event)" v-if="$route.path.indexOf('log-time') > 0" :work=workList />
     </transition>
 
     <div class="time-entries">
@@ -79,7 +79,21 @@ export default {
       date: 'Feb 17, 2017'
     }
     return {
-      timeEntries: [existingEntry]
+      timeEntries: [existingEntry],
+      workList: [
+        {
+          type: 'dev',
+          name: 'Developing'
+        },
+        {
+          type: 'bug',
+          name: 'Bug fix'
+        },
+        {
+          type: 'rev',
+          name: 'Code review'
+        }
+      ]
     }
   },
   methods: {
