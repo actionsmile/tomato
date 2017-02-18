@@ -24,14 +24,12 @@
       </div>
       <div class="form-group">
         <div class="col-sm-12">
-          <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Тип работ
+          <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Work type
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-menu">
+              <a v-for="item in work" class="dropdown-item">{{ item.name }}</a>
             </div>
           </div>
         </div>
@@ -58,6 +56,17 @@
 
 <script>
   export default {
+    props: {
+      work: {
+        type: Array,
+        default: function () {
+          return {
+            type: 'dev',
+            name: 'Developing'
+          }
+        }
+      }
+    },
     data () {
       return {
         timeEntry: {

@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       app: {
-        name: 'Разремя'
+        name: 'Sworling'
       },
       totalTime: 1.5
     }
